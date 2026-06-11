@@ -252,7 +252,8 @@ export async function extractFromUrl(url: string, options: ExtractOptions = {}):
   const { document: docForReading } = parseHTML(rawHtml, { url: finalUrl })
   const reader = new Readability(docForReading, {
     keepClasses: false,
-    serializer: (el) => el.innerHTML ?? '',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    serializer: (el: any) => (el as any).innerHTML ?? '',
   })
   const article = reader.parse()
 
